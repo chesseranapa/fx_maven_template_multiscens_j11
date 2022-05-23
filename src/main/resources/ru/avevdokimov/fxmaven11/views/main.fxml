@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="ru.avevdokimov.fxmaven11.controller.MainController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.avevdokimov.fxmaven11.MainController">
+    <children>
+        <MenuBar>
+            <menus>
+                <Menu mnemonicParsing="false" text="Переключение сцен">
+                    <items>
+                        <MenuItem fx:id="fItem" mnemonicParsing="false" onAction="#getFirstScenr" text="Сцена 1" />
+                        <MenuItem fx:id="sItem" mnemonicParsing="false" onAction="#getSecondScenr" text="Сцена 2" />
+                        <MenuItem fx:id="nwItem" mnemonicParsing="false" onAction="#getNewWindows" text="Новое окно" />
+                        <MenuItem mnemonicParsing="false" onAction="#showCustomerDialog" text="Unspecified Action" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane fx:id="mainAnchorPane" maxHeight="1.7976931348623157E308" prefHeight="2000.0" prefWidth="2000.0" />
+        <SplitPane dividerPositions="0.2608695652173913, 0.822742474916388" maxHeight="35.0" minHeight="35.0" prefHeight="35.0" prefWidth="2000.0">
+            <items>
+                <AnchorPane maxHeight="29.0" maxWidth="100.0" minHeight="29.0" minWidth="40.0" prefHeight="29.0" prefWidth="100.0">
+                    <children>
+                        <Label fx:id="lbLeftStatus" layoutX="-25.0" layoutY="6.0" prefHeight="17.0" prefWidth="86.0" text="L_Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                    </children>
+                </AnchorPane>
+                <ScrollPane maxHeight="29.0" minHeight="29.0" prefHeight="29.0" prefWidth="100.0" />
+                <AnchorPane maxHeight="29.0" maxWidth="100.0" minHeight="29.0" minWidth="40.0" prefHeight="29.0" prefWidth="100.0">
+                    <children>
+                        <Label fx:id="lbRightStatus" alignment="CENTER_RIGHT" layoutY="5.0" prefHeight="36.0" prefWidth="103.0" text="R_Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
 </VBox>
