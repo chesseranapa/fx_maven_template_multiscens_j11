@@ -1,4 +1,4 @@
-package ru.avevdokimov.fxmaven11;
+package ru.avevdokimov.fxmaven11.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import ru.avevdokimov.fxmaven11.controller.ControllerScene1;
+import ru.avevdokimov.fxmaven11.StartApplication;
 
 import java.io.IOException;
 
@@ -24,9 +24,10 @@ import java.io.IOException;
 public class MainController {
 
     //Создаём два различных загрузчика для центрального окна
-    FXMLLoader loaderScene01 = new FXMLLoader(getClass().getResource("views/scene01.fxml"));
-    FXMLLoader loaderScene02 = new FXMLLoader(getClass().getResource("views/scene02.fxml"));
-
+    FXMLLoader loaderScene01 = StartApplication.loaderScene01;
+    FXMLLoader loaderScene02 = StartApplication.loaderScene02;
+    FXMLLoader loaderForNewWindows = StartApplication.loaderForNewWindows;
+    FXMLLoader loaderForNewStage = StartApplication.loaderForNewStage;
 
     @FXML
     MenuItem fItem;
@@ -55,16 +56,12 @@ public class MainController {
 
 
     private void loadProperties() throws IOException {//Загрузка свойств вынесено в отдельную процедуру для использования при инициализации
-        //node1 = loaderScene01.load(getClass().getResource("/views/scene01.fxml"));
-        //node2 = loaderScene02.load(getClass().getResource("/views/scene02.fxml"));
-        //mainAnchorPane.getChildren().setAll(node1);
-
-        //FXMLLoader loaderScene01 = new FXMLLoader(getClass().getResource("/views/scene01.fxml"));
-        //mainAnchorPane = (AnchorPane)loaderScene01.load();
 
         //Производим загрузку из указанных ранее файлов (нужно сделать обработчик ошибок)
         loaderScene01.load();
         loaderScene02.load();
+        loaderForNewWindows.load();
+        loaderForNewStage.load();
 
         //для именнованной в главном файле и внедрённой в этот контроллер панели
         //устанавливаем элементы из корневого элемента первого загрузчкика
@@ -115,15 +112,15 @@ public class MainController {
 
     //Пример открытия нового окна с вызовом метода из его контроллера для передачи в него параметров
     public void showCustomerDialog() throws Exception {
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("views/new_stage.fxml")
-        );
-
+        FXMLLoader loader = loaderForNewStage;
         Stage stage = new Stage(StageStyle.DECORATED);
-        AnchorPane aPane = (AnchorPane)loader.load(); //Инициируем загрузку и сразу получаем панель для создания сцены
+        AnchorPane aPane = (AnchorPane)loader.getRoot(); //Инициируем загрузку и сразу получаем панель для создания сцены
         setAllIntervalsUnicumNodeForAPane(aPane, 10.0);
-        stage.setScene(
-                new Scene(aPane ,800,400) );
+        if (aPane.getScene() != null) {
+            stage.setScene(aPane.getScene());
+        } else {
+            stage.setScene(new Scene(aPane ,800,400) );
+        }
 
         ControllerScene1 controller =
                 loader.<ControllerScene1>getController(); //Получение контроллера из загрузчика
@@ -153,19 +150,19 @@ public class MainController {
 
     public void getNewWindows() throws Exception {
         Stage newWindows = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("views/new_w.fxml"));
-        newWindows.setTitle("Новое окно");
-        newWindows.setUserData("test");
-        newWindows.setMinHeight(400);
-        newWindows.setMinWidth(600);
-        newWindows.setScene(new Scene(root, 900, 600));
+        Parent root = loaderForNewWindows.getRoot();
+        if (root.getScene() == null) {
+            newWindows.setTitle("Новое окно");
+            newWindows.setUserData("test");
+            newWindows.setMinHeight(400);
+            newWindows.setMinWidth(600);
+            newWindows.setScene(new Scene(root, 900, 600));
+        } else {
+            newWindows.setScene(root.getScene());
+        }
+
         newWindows.initModality(Modality.APPLICATION_MODAL);
-
-        //initOwner(parentStage);
         newWindows.show();
-
-
-
     }
 
     public void bt01OnClick() {// Зарезервировано под Клик на соответствуюещей кнопке

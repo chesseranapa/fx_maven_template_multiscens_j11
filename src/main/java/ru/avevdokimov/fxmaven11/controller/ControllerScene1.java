@@ -2,7 +2,6 @@ package ru.avevdokimov.fxmaven11.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import ru.avevdokimov.fxmaven11.MainController;
 
 /**
  * контроллер первой сцены (элементы определены в файле *.fxml
