@@ -1,4 +1,4 @@
-package ru.avevdokimov.fxmaven11;
+package ru.avevdokimov.fxmaven11.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

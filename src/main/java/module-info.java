@@ -12,4 +12,6 @@ module ru.avevdokimov.fxmaven11 {
 
     opens ru.avevdokimov.fxmaven11 to javafx.fxml;
     exports ru.avevdokimov.fxmaven11;
+    exports ru.avevdokimov.fxmaven11.controller;
+    opens ru.avevdokimov.fxmaven11.controller to javafx.fxml;
 }
