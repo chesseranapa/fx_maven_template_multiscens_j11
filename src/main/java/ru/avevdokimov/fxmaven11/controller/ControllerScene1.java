@@ -18,6 +18,8 @@ public class ControllerScene1 {
 
     public void tf01OnAction(){
         System.out.println("В первой сцене");
+        tf01.setText("В первой сцене");
+        mc.lbLeftStatus.setText("В первой сцене");
     }
 
     public void set_tf01(String str){

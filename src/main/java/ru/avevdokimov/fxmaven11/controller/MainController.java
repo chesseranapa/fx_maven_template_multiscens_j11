@@ -91,13 +91,12 @@ public class MainController {
         //mainAnchorPane = (AnchorPane)loaderScene01.load();
 
         //Получаем контроллер для из первого загрузчика
-        ControllerScene1 controller =  loaderScene01.<ControllerScene1>getController();
+        ControllerScene1 controller1 =  loaderScene01.<ControllerScene1>getController();
 
-        controller.setOutController(this);
+        controller1.setOutController(this);
 
         //ВЫзов тестового метода из контроллера первого загрузчика
-        controller.set_tf01("testcdsc");
-
+        controller1.set_tf01("testcdsc");
     }
 
     public void setAllIntervalsUnicumNodeForAPane(AnchorPane aPane, double interval)  {
@@ -146,6 +145,14 @@ public class MainController {
     public void getSecondScenr() throws Exception {
         mainAnchorPane.getChildren().setAll((Node)loaderScene02.getRoot());
         setAllIntervalsUnicumNodeForAPane(mainAnchorPane, 3.0);
+
+        //Получаем контроллер для из второго загрузчика
+        ControllerScene2 controller2 =  loaderScene02.<ControllerScene2>getController();
+
+        controller2.setOutController(this);
+
+        //ВЫзов тестового метода из контроллера первого загрузчика
+        controller2.setTf01("из главного метод getFirstScenr");
     }
 
     public void getNewWindows() throws Exception {
