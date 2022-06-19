@@ -14,6 +14,10 @@ log/
 .springBeans
 .sts4-cache
 
+
+### FX ###
+dependency-reduced-pom.xml
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
